@@ -1,5 +1,5 @@
 package com.questcontrol.login.domain.entity;
 
-public class Usuario {
+public class login {
 
 }
