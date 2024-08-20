@@ -103,4 +103,4 @@ CREATE TABLE respuesta_pregunta(
     CONSTRAINT pk_id_respuesta_pregunta PRIMARY KEY (id),
     CONSTRAINT fk_id_respuesta_pregunta FOREIGN KEY (respuesta_id) REFERENCES opcion_respuesta(id),
     CONSTRAINT fk_id_subrespuesta_pregunta FOREIGN KEY (subrespuesta_id) REFERENCES opcion_subrespuesta(id)
-);
+); 
