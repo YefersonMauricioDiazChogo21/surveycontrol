@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -46,7 +47,7 @@ public class UsuarioRepository implements UsuarioService{
     }
 
     @Override
-    public void updateusuario(int id) {
+    public void updateusuario(Usuario usuario,int id) {
         String sql ="UPDATE usuario SET habilidato=? ,nombre_usuario=?,contraseña=? WHERE id=?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
@@ -88,8 +89,25 @@ public class UsuarioRepository implements UsuarioService{
 
     @Override
     public List<Usuario> findallusuarios() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findallusuarios'");
+        String sql ="SELECT id,habilitado,nombre_usuario,contraseña FROM usuario";
+        List<Usuario> usuarios =new ArrayList<>();
+
+        try(Connection connection = Database.getConnection();
+        PreparedStatement ps =connection.prepareStatement(sql)){
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                int idu=rs.getInt("id");
+                Boolean habilitado =rs.getBoolean("habilitado");
+                String nombre =rs.getString("nombre_usuario");
+                String contraseña =rs.getString("contraseña");
+                Usuario usuario =new Usuario(idu,habilitado,nombre,contraseña);
+                usuarios.add(usuario);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+		return usuarios;
     }
 
 }

@@ -10,13 +10,20 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario( boolean habilitado, String nombre_usuario, String contraseña) {
+        this.habilitado = habilitado;
+        this.nombre_usuario = nombre_usuario;
+        this.contraseña = contraseña;
+    }
+    
+    
     public Usuario(int id, boolean habilitado, String nombre_usuario, String contraseña) {
         this.id = id;
         this.habilitado = habilitado;
         this.nombre_usuario = nombre_usuario;
         this.contraseña = contraseña;
     }
-    
+
     public int getId() {
         return id;
     }

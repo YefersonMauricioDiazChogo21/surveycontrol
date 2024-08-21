@@ -9,7 +9,7 @@ public interface UsuarioService {
 
     void createusuario (Usuario usuario);
     Usuario deleteusuario (int id);
-    void updateusuario (int id);
+    void updateusuario (Usuario usuario,int id);
     Optional<Usuario> findusuariobyid (int id);
     List<Usuario> findallusuarios();
 
