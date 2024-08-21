@@ -2,6 +2,7 @@ package com.questcontrol;
 
 import com.questcontrol.funtions.AditionalFuntions;
 import com.questcontrol.usuario.infraestructure.controller.UsuarioConsoleAdapter;
+import com.questcontrol.rol.infraestructure.controller.RolConsoleAdapter;
 
 import java.util.Scanner;
 
@@ -19,10 +20,11 @@ public class iu {
 
             switch (options){
                 case 1:
-                UsuarioConsoleAdapter cs = new UsuarioConsoleAdapter();
-                    cs.Start();
+                UsuarioConsoleAdapter csu = new UsuarioConsoleAdapter();
+                    csu.Start();
                 case 2:
-                    break;
+                RolConsoleAdapter csr = new RolConsoleAdapter();
+                    csr.Start();
                 case 3:
                     break;
                 case 4:

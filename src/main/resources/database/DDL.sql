@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISIST questcontrol;
+DROP DATABASE IF EXISTS questcontrol;
 
 CREATE DATABASE questcontrol;
 USE questcontrol;
@@ -19,7 +19,7 @@ CREATE TABLE rol(
 
 CREATE TABLE rol_usuario(
     role_id INT,
-    uruario_id INT,
+    usuario_id INT,
     CONSTRAINT pk_id_rol_usuario PRIMARY KEY (role_id,usuario_id),
     CONSTRAINT fk_id_rol FOREIGN KEY (role_id) REFERENCES rol(id),
     CONSTRAINT fk_id_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id)
@@ -55,7 +55,7 @@ CREATE TABLE capitulo(
 
 CREATE TABLE pregunta(
     id INT AUTO_INCREMENT,
-    caputilo_id INT,
+    capitulo_id INT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     numero_pregunta VARCHAR(10),
@@ -63,7 +63,7 @@ CREATE TABLE pregunta(
     comentario_pregunta TEXT,
     texto_pregunta TEXT,
     CONSTRAINT pk_id_pregunta PRIMARY KEY (id),
-    CONSTRAINT fk_id_capitulo FOREIGN KEY (capuitulo_id) REFERENCES capitulo(id)
+    CONSTRAINT fk_id_capitulo FOREIGN KEY (capitulo_id) REFERENCES capitulo(id)
 );
 
 CREATE TABLE opcion_respuesta(
@@ -91,7 +91,7 @@ CREATE TABLE opcion_subrespuesta(
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tipo_componente_html VARCHAR(255),
     subrespueta_text TEXT,
-    CONSTRAINT pk_id_opcion_subrespuesta FOREIGN KEY (id),
+    CONSTRAINT pk_id_opcion_subrespuesta PRIMARY KEY (id),
     CONSTRAINT fk_id_opcion_respuesta FOREIGN KEY (opcion_respuesta_id) REFERENCES opcion_respuesta(id)
 );
 
