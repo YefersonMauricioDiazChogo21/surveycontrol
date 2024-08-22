@@ -18,7 +18,7 @@ CREATE TABLE rol(
 );
 
 CREATE TABLE rol_usuario(
-    role_id INT,
+    rol_id INT,
     usuario_id INT,
     CONSTRAINT pk_id_rol_usuario PRIMARY KEY (role_id,usuario_id),
     CONSTRAINT fk_id_rol FOREIGN KEY (role_id) REFERENCES rol(id),

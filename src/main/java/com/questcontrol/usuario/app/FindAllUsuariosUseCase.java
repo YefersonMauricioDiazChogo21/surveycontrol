@@ -6,7 +6,7 @@ import com.questcontrol.usuario.domain.entity.Usuario;
 import com.questcontrol.usuario.domain.service.UsuarioService;
 
 public class FindAllUsuariosUseCase {
-     private UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     public FindAllUsuariosUseCase(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;

@@ -7,8 +7,8 @@ import com.questcontrol.rolusuario.domain.entity.RolUsuario;
 
 public interface RolUsuarioService {
     void createRolUsuario (RolUsuario rolusuario);
-    RolUsuario deleteRolusuario (int id);
-    void updateRolusuario(RolUsuario rol,int id);
-    Optional<RolUsuario> findRolusuarioById (int id);
+    RolUsuario deleteRolUsuario (int id);
+    void updateRolUsuario(RolUsuario rol,int id);
+    Optional<RolUsuario> findRolUsuarioById (int id);
     List<RolUsuario> findallRolesUsuario();
 }

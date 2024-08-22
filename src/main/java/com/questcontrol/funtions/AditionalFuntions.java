@@ -19,11 +19,13 @@ public class AditionalFuntions {
     public static int menuValidator(int start, int end){
         try (Scanner sc = new Scanner(System.in)) {
             int number;
+            Boolean bandera =true;
             do{
                 try{
                     number=sc.nextInt();
                     
                     if(number>=start && number <=end){
+                        bandera=false;
                         return number;
                     }else{
                         clearConsole();
@@ -34,8 +36,9 @@ public class AditionalFuntions {
                     System.out.println("Error, please only digit a number\n Digit a number: ");
                     sc.next();
                 }
-            }while(true);
+            }while(bandera);
         }
+        return end;
     }
     public static void pauseConsole(){
         try (Scanner scanner = new Scanner(System.in)) {

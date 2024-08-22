@@ -1,4 +1,4 @@
-package com.questcontrol.usuario.infraestructure.repository;
+package com.questcontrol.rolusuario.infraestructure.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,20 +10,20 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import com.questcontrol.Database;
-import com.questcontrol.usuario.domain.entity.Usuario;
-import com.questcontrol.usuario.domain.service.UsuarioService;
+import com.questcontrol.rolusuario.domain.entity.RolUsuario;
+import com.questcontrol.rolusuario.domain.service.RolUsuarioService;
 
-public class UsuarioRepository implements UsuarioService{
+
+public class RolUsuarioRepository implements RolUsuarioService{
     Scanner scanner= new Scanner(System.in);
 
     @Override
-    public void createusuario(Usuario usuario) {
-        String sql ="INSERT INTO usuario(habilitado,nombre_usuario,contraseña) VALUES (?,?,?)";
+    public void createRolUsuario(RolUsuario rolusuario) {
+         String sql ="INSERT INTO rol_id,rol_usuario(usuario_id) VALUES (?,?)";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
-            ps.setBoolean(1, usuario.isHabilitado());
-            ps.setString(2, usuario.getNombre_usuario());
-            ps.setString(3, usuario.getContraseña());
+            ps.setInt(1, rolusuario.getUsuario_id());
+            ps.setInt(2, rolusuario.getRol_id());
             ps.executeUpdate();
             System.out.println("Carga de usuario exitoso");
         }catch(SQLException e){
@@ -32,8 +32,8 @@ public class UsuarioRepository implements UsuarioService{
     }
 
     @Override
-    public Usuario deleteusuario(int id) {
-        String sql ="DELETE FROM usuario WHERE id = ?";
+    public RolUsuario deleteRolUsuario(int id) {
+        String sql ="DELETE FROM rol_usuario WHERE id = ?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
             ps.setInt(1, id);
@@ -47,17 +47,13 @@ public class UsuarioRepository implements UsuarioService{
     }
 
     @Override
-    public void updateusuario(Usuario usuario,int id) {
-        String sql ="UPDATE usuario SET habilidato=? ,nombre_usuario=?,contraseña=? WHERE id=?";
+    public void updateRolUsuario(RolUsuario rol, int id) {
+        String sql ="UPDATE rol_usuario SET usuario_id=? WHERE id=?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
-            Boolean habilitado =scanner.nextBoolean();
-            String nombre= scanner.nextLine();
-            String contraseña= scanner.nextLine();
-            ps.setBoolean(1, habilitado);
-            ps.setString(2, nombre);
-            ps.setString(3, contraseña);
-            ps.setInt(4, id);
+            int usuario_id= scanner.nextInt();
+            ps.setInt(1, usuario_id);
+            ps.setInt(2, id);
             ps.executeUpdate();
             System.out.print("Actualizacion de usuario exitosa");
         }catch(SQLException e){
@@ -66,8 +62,8 @@ public class UsuarioRepository implements UsuarioService{
     }
 
     @Override
-    public Optional<Usuario> findusuariobyid(int id){
-        String sql ="SELECT id,habilitado,nombre_usuario,contraseña FROM usuario WHERE id=?";
+    public Optional<RolUsuario> findRolUsuarioById(int id) {
+        String sql ="SELECT id,usuario_id FROM rol_usuario WHERE id=?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps =connection.prepareStatement(sql)){
             ps.setInt(1,id);
@@ -75,11 +71,9 @@ public class UsuarioRepository implements UsuarioService{
 
             while(rs.next()){
                 int idu=rs.getInt("id");
-                Boolean habilitado =rs.getBoolean("habilitado");
-                String nombre =rs.getString("nombre_usuario");
-                String contraseña =rs.getString("contraseña");
-                Usuario usuario =new Usuario(idu,habilitado,nombre,contraseña);
-                return Optional.of(usuario);
+                int usuario_id =rs.getInt("usuario_id");
+                RolUsuario rolusuario =new RolUsuario(idu,usuario_id);
+                return Optional.of(rolusuario);
             }
         } catch(SQLException e){
             e.printStackTrace();
@@ -88,9 +82,9 @@ public class UsuarioRepository implements UsuarioService{
     }
 
     @Override
-    public List<Usuario> findallusuarios() {
+    public List<RolUsuario> findallRolesUsuario() {
         String sql ="SELECT id,habilitado,nombre_usuario,contraseña FROM usuario";
-        List<Usuario> usuarios =new ArrayList<>();
+        List<RolUsuario> rolUsuarios =new ArrayList<>();
 
         try(Connection connection = Database.getConnection();
         PreparedStatement ps =connection.prepareStatement(sql)){
@@ -98,16 +92,14 @@ public class UsuarioRepository implements UsuarioService{
 
             while(rs.next()){
                 int idu=rs.getInt("id");
-                Boolean habilitado =rs.getBoolean("habilitado");
-                String nombre =rs.getString("nombre_usuario");
-                String contraseña =rs.getString("contraseña");
-                Usuario usuario =new Usuario(idu,habilitado,nombre,contraseña);
-                usuarios.add(usuario);
+                int usuario_id=rs.getInt("usuario_id");
+                RolUsuario rolUsuario =new RolUsuario(idu,usuario_id);
+                rolUsuarios.add(rolUsuario);
             }
         } catch(SQLException e){
             e.printStackTrace();
         }
-		return usuarios;
+		return rolUsuarios;
     }
 
 }

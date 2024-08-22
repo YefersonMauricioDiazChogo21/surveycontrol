@@ -1,7 +1,7 @@
 package com.questcontrol.rolusuario.domain.entity;
 
 public class RolUsuario {
-    private int id;
+    private int rol_id;
     private int usuario_id;
     
     public RolUsuario() {
@@ -12,17 +12,19 @@ public class RolUsuario {
     }
 
     public RolUsuario(int id, int usuario_id) {
-        this.id = id;
+        this.rol_id = id;
         this.usuario_id = usuario_id;
     }
 
-    public int getId() {
-        return id;
+
+    public int getRol_id() {
+        return rol_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRol_id(int rol_id) {
+        this.rol_id = rol_id;
     }
+
 
     public int getUsuario_id() {
         return usuario_id;
