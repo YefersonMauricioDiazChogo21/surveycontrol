@@ -38,6 +38,7 @@ public static int menuValidator(int start, int end){
             scanner.next(); 
         }
     }
+    scanner.close();
     return end;
    
 }
