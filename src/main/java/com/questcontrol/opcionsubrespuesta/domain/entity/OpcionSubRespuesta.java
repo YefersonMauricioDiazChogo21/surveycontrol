@@ -14,6 +14,14 @@ public class OpcionSubRespuesta {
     public OpcionSubRespuesta() {
     }
 
+    public OpcionSubRespuesta(int numero_subrespuesta, int opcion_respuesta_id, String tipo_componente_html,
+            String subrespueta_text) {
+        this.numero_subrespuesta = numero_subrespuesta;
+        this.opcion_respuesta_id = opcion_respuesta_id;
+        this.tipo_componente_html = tipo_componente_html;
+        this.subrespueta_text = subrespueta_text;
+    }
+
     public OpcionSubRespuesta(int numero_subrespuesta, Timestamp fecha_creacion, int opcion_respuesta_id,
             Timestamp fecha_actualizacion, String tipo_componente_html, String subrespueta_text) {
         this.numero_subrespuesta = numero_subrespuesta;

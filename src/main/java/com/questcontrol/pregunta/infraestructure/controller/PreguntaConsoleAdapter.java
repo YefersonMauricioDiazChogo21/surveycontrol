@@ -9,40 +9,40 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.questcontrol.funtions.AditionalFuntions;
-import com.questcontrol.rol.app.CreateRolUseCase;
-import com.questcontrol.rol.app.DeleteRolUseCase;
-import com.questcontrol.rol.app.FindAllRolesUseCase;
-import com.questcontrol.rol.app.FindRolByIdUseCase;
-import com.questcontrol.rol.app.UpdateRolUseCase;
-import com.questcontrol.rol.domain.entity.Rol;
-import com.questcontrol.rol.domain.service.RolService;
-import com.questcontrol.rol.infraestructure.repository.RolRepository;
+import com.questcontrol.pregunta.app.CreatePreguntaUseCase;
+import com.questcontrol.pregunta.app.DeletePreguntaUseCase;
+import com.questcontrol.pregunta.app.FindAllPreguntasUseCase;
+import com.questcontrol.pregunta.app.FindPreguntaByIdUseCase;
+import com.questcontrol.pregunta.app.UpdatePreguntaUseCase;
+import com.questcontrol.pregunta.domain.entity.Pregunta;
+import com.questcontrol.pregunta.domain.service.PreguntaService;
+import com.questcontrol.pregunta.infraestructure.repository.PreguntaRepository;
 
 public class PreguntaConsoleAdapter {
-    private RolService rolService;
-    private CreateRolUseCase createRol;
-    private DeleteRolUseCase deleteRol;
-    private UpdateRolUseCase updateRol;
-    private FindAllRolesUseCase allRoles;
-    private FindRolByIdUseCase findRol;
+    private PreguntaService preguntaService;
+    private CreatePreguntaUseCase createPregunta;
+    private DeletePreguntaUseCase deletePregunta;
+    private UpdatePreguntaUseCase updatePregunta;
+    private FindAllPreguntasUseCase allPreguntas;
+    private FindPreguntaByIdUseCase findPregunta;
     Scanner scanner = new Scanner(System.in);
 
-    public RolConsoleAdapter() {
-        this.rolService = new RolRepository();
-        this.createRol= new CreateRolUseCase(rolService);
-        this.deleteRol = new DeleteRolUseCase(rolService);
-        this.updateRol= new UpdateRolUseCase(rolService);
-        this.allRoles = new FindAllRolesUseCase(rolService);
-        this.findRol = new FindRolByIdUseCase(rolService);
+    public PreguntaConsoleAdapter() {
+        this.preguntaService = new PreguntaRepository();
+        this.createPregunta= new CreatePreguntaUseCase(preguntaService);
+        this.deletePregunta = new DeletePreguntaUseCase(preguntaService);
+        this.updatePregunta= new UpdatePreguntaUseCase(preguntaService);
+        this.allPreguntas = new FindAllPreguntasUseCase(preguntaService);
+        this.findPregunta = new FindPreguntaByIdUseCase(preguntaService);
     }
 
     public void Start(){
     String menu = """
-                        1. Agregar rol
-                        2. Eliminar rol
-                        3. Listar todos los roles
-                        4. Buscar rol por id
-                        5. Actualizar rol
+                        1. Agregar pregunta
+                        2. Eliminar pregunta
+                        3. Listar todos los preguntas
+                        4. Buscar pregunta por id
+                        5. Actualizar pregunta
                         6. Salir
                         """;
     System.out.println(menu);
@@ -56,11 +56,11 @@ public class PreguntaConsoleAdapter {
     public void ejecutar(int opcion) {
         switch (opcion) {
             case 1:
-
+                int capitulo_id = Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese"));
                 String newrol = JOptionPane.showInputDialog(null, "Ingrese el rol: ");
                 
-                Rol rol = new Rol(newrol);
-                createRol.execute(rol);
+                Pregunta rol = new Pregunta(capitulo_id,newrol,newrol,newrol,newrol);
+                createPregunta.execute(rol);
                 Start();
 
                 break;
@@ -68,7 +68,7 @@ public class PreguntaConsoleAdapter {
                 try {
                     String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del rol para eliminar: ");
                     int ideliminado = Integer.parseInt(idaeliminar);
-                    deleteRol.execute(ideliminado);
+                    deletePregunta.execute(ideliminado);
                     Start();
                     
                 } catch (Exception e) {
@@ -79,14 +79,14 @@ public class PreguntaConsoleAdapter {
                 break;
             case 3:
                 StringBuilder salida = new StringBuilder("Usuarios:\n");
-                List<Rol> role = allRoles.execute();
-                for (Rol rols : role) {
+                List<Pregunta> role = allPreguntas.execute();
+                for (Pregunta rols : role) {
                     int id = rols.getId();
-                    String namerol = rols.getRol();
+                    int capid = rols.getCapitulo_id();
                     
 
                     salida.append("ID: ").append(id).append("\n")
-                    .append("Nombre: ").append(namerol).append(", ");
+                    .append("Nombre: ").append(capid).append(", ");
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -96,7 +96,7 @@ public class PreguntaConsoleAdapter {
                 JScrollPane scrollPane = new JScrollPane(textArea);
                 scrollPane.setPreferredSize(new java.awt.Dimension(400, 300)); 
                
-                JOptionPane.showMessageDialog(null, scrollPane, "Roles", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, scrollPane, "Preguntaes", JOptionPane.INFORMATION_MESSAGE);
                 
                 Start();
                 break;
@@ -104,16 +104,16 @@ public class PreguntaConsoleAdapter {
                 try {
                     String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id del rol pque desea buscar: ");
                     int idbuscar = Integer.parseInt(idusuario);
-                    Optional<Rol> dato = findRol.execute(idbuscar);
+                    Optional<Pregunta> dato = findPregunta.execute(idbuscar);
                     StringBuilder salidaid = new StringBuilder("roles:\n");
                     if (dato.isPresent()) {
-                        Rol datopre = dato.get();
+                        Pregunta datopre = dato.get();
                         int id = datopre.getId();
-                        String namerol = datopre.getRol();
+                        int capid = datopre.getCapitulo_id();
     
                         
                         salidaid.append("ID: ").append(id).append("\n")
-                            .append("Nombre: ").append(namerol);
+                            .append("Nombre: ").append(capid);
                     } 
                     JOptionPane.showMessageDialog(null, salidaid);
                     Start();
@@ -130,8 +130,8 @@ public class PreguntaConsoleAdapter {
                 boolean bandera = true;
                 String idrolf = JOptionPane.showInputDialog(null, "Ingrese el id del usuario que desea buscar: ");
                 int idactualizar = Integer.parseInt(idrolf);
-                Optional<Rol> valor = findRol.execute(idactualizar);
-                Rol rolActalizar = valor.get();
+                Optional<Pregunta> valor = findPregunta.execute(idactualizar);
+                Pregunta rolActalizar = valor.get();
                 while (bandera) {
                     
                     String opcionesActualizar = """
@@ -144,7 +144,7 @@ public class PreguntaConsoleAdapter {
                    
                     switch (opc) {
                         case 1:
-                            rolActalizar.setRol(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol"));
+                            rolActalizar.setCapitulo_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol")));
                             break;
                         case 2:
                             bandera = false;
@@ -152,7 +152,7 @@ public class PreguntaConsoleAdapter {
                         }
                         
                 } 
-                updateRol.execute(rolActalizar,idactualizar); 
+                updatePregunta.execute(rolActalizar,idactualizar); 
                 
             } catch (Exception e) {
                 e.printStackTrace();

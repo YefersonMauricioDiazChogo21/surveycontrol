@@ -57,18 +57,19 @@ public class CapituloConsoleAdapter {
         switch (opcion) {
             case 1:
 
-                String idForm = JOptionPane.showInputDialog(null, "Ingrese el id del formulario del capitulo: ");
-                String idFor = JOptionPane.showInputDialog(null, "Ingrese el id del formulario del capitulo: ");
-                Capitulo capitulo = new Capitulo(idForm,);
-                createRol.execute(rol);
+                int idForm = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del formulario del capitulo: "));
+                String numcap = JOptionPane.showInputDialog(null, "Ingrese el numero del capitulo: ");
+                String tiulocap = JOptionPane.showInputDialog(null, "Ingrese el titulo del  capitulo: ");
+                Capitulo capitulo = new Capitulo(idForm,numcap,tiulocap);
+                createCapitulo.execute(capitulo);
                 Start();
 
                 break;
             case 2:
                 try {
-                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del rol para eliminar: ");
+                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del capitulo para eliminar: ");
                     int ideliminado = Integer.parseInt(idaeliminar);
-                    deleteRol.execute(ideliminado);
+                    deleteCapitulo.execute(ideliminado);
                     Start();
                     
                 } catch (Exception e) {
@@ -79,14 +80,17 @@ public class CapituloConsoleAdapter {
                 break;
             case 3:
                 StringBuilder salida = new StringBuilder("Usuarios:\n");
-                List<Rol> role = allRoles.execute();
-                for (Rol rols : role) {
-                    int id = rols.getId();
-                    String namerol = rols.getRol();
+                List<Capitulo> role = allCapitulos.execute();
+                for (Capitulo caps : role) {
+                    int id = caps.getId();
+                    int idform = caps.getFormulario_id();
+                    java.sql.Timestamp fechaCreacion = caps.getFecha_creacion();
+                    String numCapitulo = caps.getNumero_capitulo();
+                    String tituloCapitulo = caps.getTitulo_capitulo();
                     
 
                     salida.append("ID: ").append(id).append("\n")
-                    .append("Nombre: ").append(namerol).append(", ");
+                    .append("Id formulario: ").append(idform).append(", ").append("Fecha Creacion: ").append(fechaCreacion).append(", ").append("Numero capitulo: ").append(numCapitulo).append(", ").append("Titulo Capitulo: ").append(tituloCapitulo);
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -104,16 +108,19 @@ public class CapituloConsoleAdapter {
                 try {
                     String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id del rol pque desea buscar: ");
                     int idbuscar = Integer.parseInt(idusuario);
-                    Optional<Rol> dato = findRol.execute(idbuscar);
+                    Optional<Capitulo> dato = findCapitulo.execute(idbuscar);
                     StringBuilder salidaid = new StringBuilder("roles:\n");
                     if (dato.isPresent()) {
-                        Rol datopre = dato.get();
+                        Capitulo datopre = dato.get();
                         int id = datopre.getId();
-                        String namerol = datopre.getRol();
+                        int idform = datopre.getFormulario_id();
+                        java.sql.Timestamp fechaCreacion = datopre.getFecha_creacion();
+                        String numCapitulo = datopre.getNumero_capitulo();
+                        String tituloCapitulo = datopre.getTitulo_capitulo();
     
                         
                         salidaid.append("ID: ").append(id).append("\n")
-                            .append("Nombre: ").append(namerol);
+                        .append("Id formulario: ").append(idform).append(", ").append("Fecha Creacion: ").append(fechaCreacion).append(", ").append("Numero capitulo: ").append(numCapitulo).append(", ").append("Titulo Capitulo: ").append(tituloCapitulo);
                     } 
                     JOptionPane.showMessageDialog(null, salidaid);
                     Start();
@@ -130,29 +137,37 @@ public class CapituloConsoleAdapter {
                 boolean bandera = true;
                 String idrolf = JOptionPane.showInputDialog(null, "Ingrese el id del usuario que desea buscar: ");
                 int idactualizar = Integer.parseInt(idrolf);
-                Optional<Rol> valor = findRol.execute(idactualizar);
-                Rol rolActalizar = valor.get();
+                Optional<Capitulo> valor = findCapitulo.execute(idactualizar);
+                Capitulo rolActalizar = valor.get();
                 while (bandera) {
                     
                     String opcionesActualizar = """
-                        1. Nombre rol
-                        2. Salir
+                        1. Id formulario
+                        2. Numero capitulo
+                        3. Titulo capitulo
+                        4. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,2);
+                    Integer opc = AditionalFuntions.menuValidator(1,4);
 
                    
                     switch (opc) {
                         case 1:
-                            rolActalizar.setRol(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol"));
+                            rolActalizar.setFormulario_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol")));
                             break;
                         case 2:
+                            rolActalizar.setNumero_capitulo(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol"));
+                            break;
+                        case 3:
+                            rolActalizar.setTitulo_capitulo(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol"));
+                            break;
+                        case 4:
                             bandera = false;
                             break;
                         }
                         
                 } 
-                updateRol.execute(rolActalizar,idactualizar); 
+                updateCapitulo.execute(rolActalizar,idactualizar); 
                 
             } catch (Exception e) {
                 e.printStackTrace();

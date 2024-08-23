@@ -9,7 +9,11 @@ public class CategoriaCatalogo {
 
     public CategoriaCatalogo() {
     }
-    
+
+    public CategoriaCatalogo(String nombre) {
+        this.nombre = nombre;
+    }
+
     public CategoriaCatalogo(java.sql.Timestamp fecha_creacion, java.sql.Timestamp fecha_actualizacion, String nombre) {
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;

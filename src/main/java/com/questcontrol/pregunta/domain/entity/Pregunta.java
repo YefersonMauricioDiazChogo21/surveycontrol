@@ -15,6 +15,15 @@ public class Pregunta {
     public Pregunta() {
     }
 
+    public Pregunta(int capitulo_id, String numero_pregunta, String tipo_respuesta, String comentario_pregunta,
+            String texto_pregunta) {
+        this.capitulo_id = capitulo_id;
+        this.numero_pregunta = numero_pregunta;
+        this.tipo_respuesta = tipo_respuesta;
+        this.comentario_pregunta = comentario_pregunta;
+        this.texto_pregunta = texto_pregunta;
+    }
+
     public Pregunta(int capitulo_id, Timestamp fecha_creacion, Timestamp fecha_actualizacion, String numero_pregunta,
             String tipo_respuesta, String comentario_pregunta, String texto_pregunta) {
         this.capitulo_id = capitulo_id;

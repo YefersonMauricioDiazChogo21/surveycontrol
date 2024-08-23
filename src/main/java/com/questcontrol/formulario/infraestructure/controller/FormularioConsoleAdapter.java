@@ -9,40 +9,40 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.questcontrol.funtions.AditionalFuntions;
-import com.questcontrol.rol.app.CreateRolUseCase;
-import com.questcontrol.rol.app.DeleteRolUseCase;
-import com.questcontrol.rol.app.FindAllRolesUseCase;
-import com.questcontrol.rol.app.FindRolByIdUseCase;
-import com.questcontrol.rol.app.UpdateRolUseCase;
-import com.questcontrol.rol.domain.entity.Rol;
-import com.questcontrol.rol.domain.service.RolService;
-import com.questcontrol.rol.infraestructure.repository.RolRepository;
+import com.questcontrol.formulario.app.CreateFormularioUseCase;
+import com.questcontrol.formulario.app.DeleteFormularioUseCase;
+import com.questcontrol.formulario.app.FindAllFormulariosUseCase;
+import com.questcontrol.formulario.app.FindFormularioByIdUseCase;
+import com.questcontrol.formulario.app.UpdateFormularioUseCase;
+import com.questcontrol.formulario.domain.entity.Formulario;
+import com.questcontrol.formulario.domain.service.FormularioService;
+import com.questcontrol.formulario.infraestructure.repository.FormularioRepository;
 
 public class FormularioConsoleAdapter {
-    private RolService rolService;
-    private CreateRolUseCase createRol;
-    private DeleteRolUseCase deleteRol;
-    private UpdateRolUseCase updateRol;
-    private FindAllRolesUseCase allRoles;
-    private FindRolByIdUseCase findRol;
+    private FormularioService rolService;
+    private CreateFormularioUseCase createFormulario;
+    private DeleteFormularioUseCase deleteFormulario;
+    private UpdateFormularioUseCase updateFormulario;
+    private FindAllFormulariosUseCase allFormularios;
+    private FindFormularioByIdUseCase findFormulario;
     Scanner scanner = new Scanner(System.in);
 
-    public RolConsoleAdapter() {
-        this.rolService = new RolRepository();
-        this.createRol= new CreateRolUseCase(rolService);
-        this.deleteRol = new DeleteRolUseCase(rolService);
-        this.updateRol= new UpdateRolUseCase(rolService);
-        this.allRoles = new FindAllRolesUseCase(rolService);
-        this.findRol = new FindRolByIdUseCase(rolService);
+    public FormularioConsoleAdapter() {
+        this.rolService = new FormularioRepository();
+        this.createFormulario= new CreateFormularioUseCase(rolService);
+        this.deleteFormulario = new DeleteFormularioUseCase(rolService);
+        this.updateFormulario= new UpdateFormularioUseCase(rolService);
+        this.allFormularios = new FindAllFormulariosUseCase(rolService);
+        this.findFormulario = new FindFormularioByIdUseCase(rolService);
     }
 
     public void Start(){
     String menu = """
-                        1. Agregar rol
-                        2. Eliminar rol
-                        3. Listar todos los roles
-                        4. Buscar rol por id
-                        5. Actualizar rol
+                        1. Agregar formulario
+                        2. Eliminar formulario
+                        3. Listar todos los formularios
+                        4. Buscar formulario por id
+                        5. Actualizar formulario
                         6. Salir
                         """;
     System.out.println(menu);
@@ -57,18 +57,19 @@ public class FormularioConsoleAdapter {
         switch (opcion) {
             case 1:
 
-                String newrol = JOptionPane.showInputDialog(null, "Ingrese el rol: ");
+                String newdesc = JOptionPane.showInputDialog(null, "Ingrese la descripcion del formulario: ");
+                String newform = JOptionPane.showInputDialog(null, "Ingrese el nombre del formulario: ");
                 
-                Rol rol = new Rol(newrol);
-                createRol.execute(rol);
+                Formulario formulario = new Formulario(newdesc,newform);
+                createFormulario.execute(formulario);
                 Start();
 
                 break;
             case 2:
                 try {
-                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del rol para eliminar: ");
+                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del formulario para eliminar: ");
                     int ideliminado = Integer.parseInt(idaeliminar);
-                    deleteRol.execute(ideliminado);
+                    deleteFormulario.execute(ideliminado);
                     Start();
                     
                 } catch (Exception e) {
@@ -78,15 +79,17 @@ public class FormularioConsoleAdapter {
                 
                 break;
             case 3:
-                StringBuilder salida = new StringBuilder("Usuarios:\n");
-                List<Rol> role = allRoles.execute();
-                for (Rol rols : role) {
-                    int id = rols.getId();
-                    String namerol = rols.getRol();
+                StringBuilder salida = new StringBuilder("Formularios:\n");
+                List<Formulario> form = allFormularios.execute();
+                for (Formulario forms : form) {
+                    int id = forms.getId();
+                    String descripcion = forms.getDescripcion();
+                    String nameform = forms.getNombre();
+                    java.sql.Timestamp fechaCreacion = forms.getFecha_creacion();
                     
 
-                    salida.append("ID: ").append(id).append("\n")
-                    .append("Nombre: ").append(namerol).append(", ");
+                    salida.append("ID: ").append(id).append("\n").append("Descripcion: ").append(descripcion)
+                    .append("Nombre: ").append(nameform).append(", ").append("Fecha Creacion: ").append(fechaCreacion);
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -96,24 +99,26 @@ public class FormularioConsoleAdapter {
                 JScrollPane scrollPane = new JScrollPane(textArea);
                 scrollPane.setPreferredSize(new java.awt.Dimension(400, 300)); 
                
-                JOptionPane.showMessageDialog(null, scrollPane, "Roles", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, scrollPane, "Formularios", JOptionPane.INFORMATION_MESSAGE);
                 
                 Start();
                 break;
             case 4:
                 try {
-                    String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id del rol pque desea buscar: ");
+                    String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id del formulario que desea buscar: ");
                     int idbuscar = Integer.parseInt(idusuario);
-                    Optional<Rol> dato = findRol.execute(idbuscar);
+                    Optional<Formulario> dato = findFormulario.execute(idbuscar);
                     StringBuilder salidaid = new StringBuilder("roles:\n");
                     if (dato.isPresent()) {
-                        Rol datopre = dato.get();
+                        Formulario datopre = dato.get();
                         int id = datopre.getId();
-                        String namerol = datopre.getRol();
+                        String descripcion = datopre.getDescripcion();
+                        String nameform = datopre.getNombre();
+                        java.sql.Timestamp fechaCreacion = datopre.getFecha_creacion();
     
                         
-                        salidaid.append("ID: ").append(id).append("\n")
-                            .append("Nombre: ").append(namerol);
+                        salidaid.append("ID: ").append(id).append("\n").append("Descripcion: ").append(descripcion)
+                        .append("Nombre: ").append(nameform).append(", ").append("Fecha Creacion: ").append(fechaCreacion);
                     } 
                     JOptionPane.showMessageDialog(null, salidaid);
                     Start();
@@ -128,15 +133,16 @@ public class FormularioConsoleAdapter {
             case 5:
             try {
                 boolean bandera = true;
-                String idrolf = JOptionPane.showInputDialog(null, "Ingrese el id del usuario que desea buscar: ");
-                int idactualizar = Integer.parseInt(idrolf);
-                Optional<Rol> valor = findRol.execute(idactualizar);
-                Rol rolActalizar = valor.get();
+                String idForm = JOptionPane.showInputDialog(null, "Ingrese el id del formulario que desea buscar: ");
+                int idactualizar = Integer.parseInt(idForm);
+                Optional<Formulario> valor = findFormulario.execute(idactualizar);
+                Formulario formularioActalizar = valor.get();
                 while (bandera) {
                     
                     String opcionesActualizar = """
                         1. Nombre rol
-                        2. Salir
+                        2. Descripcion del rol
+                        3. Salir
                         """;
                     System.out.println(opcionesActualizar);
                     Integer opc = AditionalFuntions.menuValidator(1,2);
@@ -144,15 +150,18 @@ public class FormularioConsoleAdapter {
                    
                     switch (opc) {
                         case 1:
-                            rolActalizar.setRol(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol"));
+                            formularioActalizar.setNombre(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del formulario"));
                             break;
                         case 2:
+                            formularioActalizar.setDescripcion(JOptionPane.showInputDialog(null, "Ingrese la nueva descripcion del formulario"));
+                            break;
+                        case 3:
                             bandera = false;
                             break;
                         }
                         
                 } 
-                updateRol.execute(rolActalizar,idactualizar); 
+                updateFormulario.execute(formularioActalizar,idactualizar); 
                 
             } catch (Exception e) {
                 e.printStackTrace();

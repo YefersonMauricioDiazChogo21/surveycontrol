@@ -17,6 +17,21 @@ public class OpcionRespuesta {
     public OpcionRespuesta() {
     }
 
+    
+
+    public OpcionRespuesta(int valor_opcion, int catalogo_id, int respuesta_padre_id, int pregunta_id,
+            String tipo_componente_html, String comentario_pregunta, String opcion_text) {
+        this.valor_opcion = valor_opcion;
+        this.catalogo_id = catalogo_id;
+        this.respuesta_padre_id = respuesta_padre_id;
+        this.pregunta_id = pregunta_id;
+        this.tipo_componente_html = tipo_componente_html;
+        this.comentario_pregunta = comentario_pregunta;
+        this.opcion_text = opcion_text;
+    }
+
+
+
     public OpcionRespuesta(int valor_opcion, int catalogo_id, Timestamp fecha_creacion, int respuesta_padre_id,
             int pregunta_id, Timestamp fecha_actualizacion, String tipo_componente_html, String comentario_pregunta,
             String opcion_text) {

@@ -12,6 +12,14 @@ public class Capitulo {
 
     public Capitulo() {
     }
+    
+
+    public Capitulo(int formulario_id, String numero_capitulo, String titulo_capitulo) {
+        this.formulario_id = formulario_id;
+        this.numero_capitulo = numero_capitulo;
+        this.titulo_capitulo = titulo_capitulo;
+    }
+
 
     public Capitulo(Timestamp fecha_creacion, int formulario_id, Timestamp fecha_actualizacion,
             String numero_capitulo, String titulo_capitulo) {
