@@ -25,7 +25,7 @@ public class CapituloRepository implements CapituloService {
             ps.setString(2, capitulo.getNumero_capitulo());
             ps.setString(3, capitulo.getTitulo_capitulo());
             ps.executeUpdate();
-            System.out.println("Carga de usuario exitoso");
+            System.out.println("Carga de capitulo exitoso");
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class CapituloRepository implements CapituloService {
         PreparedStatement ps= connection.prepareStatement(sql)){
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Eliminacion de usuario exitoso");
+            System.out.println("Eliminacion de capitulo exitoso");
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("Id no encontrado");
@@ -67,8 +67,8 @@ public class CapituloRepository implements CapituloService {
     }
 
     @Override
-    public Optional<Capitulo> findCapitulooById(int id) {
-        String sql ="SELECT id,fecha_creacion,formulario_id, fecha_actualizacion,numero_capitulo,titulo_capitulo FROM formulario WHERE id=?";
+    public Optional<Capitulo> findCapituloById(int id) {
+        String sql ="SELECT id,fecha_creacion,formulario_id, fecha_actualizacion,numero_capitulo,titulo_capitulo FROM capitulo WHERE id=?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps =connection.prepareStatement(sql)){
             ps.setInt(1,id);
@@ -79,8 +79,8 @@ public class CapituloRepository implements CapituloService {
                 java.sql.Timestamp fechaCreacion = rs.getTimestamp("fecha_creacion");
                 int formulario_id= rs.getInt("formulario_id");
                 java.sql.Timestamp fechaActualizacion = rs.getTimestamp("fecha_actualizacion");
-                String numero_capitulo=rs.getString("descripcion");
-                String titulo_capitulo =rs.getString("nombre_usuario");
+                String numero_capitulo=rs.getString("numero_capitulo");
+                String titulo_capitulo =rs.getString("titulo_capitulo");
                 
                 Capitulo capitulo =new Capitulo(idu,fechaCreacion,formulario_id,fechaActualizacion,numero_capitulo,titulo_capitulo);
                 return Optional.of(capitulo);
@@ -93,8 +93,9 @@ public class CapituloRepository implements CapituloService {
 
     @Override
     public List<Capitulo> findAllCapitulos() {
-        String sql ="SELECT id,fecha_creacion,formulario_id, fecha_actualizacion,numero_capitulo,titulo_capitulo FROM formulario WHERE id=?";
+        String sql ="SELECT id,fecha_creacion,formulario_id, fecha_actualizacion,numero_capitulo,titulo_capitulo FROM capitulo WHERE id=?";
         List<Capitulo> capitulos =new ArrayList<>();
+        
         try(Connection connection = Database.getConnection();
         PreparedStatement ps =connection.prepareStatement(sql)){
             ResultSet rs=ps.executeQuery();
@@ -104,8 +105,8 @@ public class CapituloRepository implements CapituloService {
                 java.sql.Timestamp fechaCreacion = rs.getTimestamp("fecha_creacion");
                 int formulario_id= rs.getInt("formulario_id");
                 java.sql.Timestamp fechaActualizacion = rs.getTimestamp("fecha_actualizacion");
-                String numero_capitulo=rs.getString("descripcion");
-                String titulo_capitulo =rs.getString("nombre_usuario");
+                String numero_capitulo=rs.getString("numero_capitulo");
+                String titulo_capitulo =rs.getString("titulo_capitulo");
                 
                 Capitulo capitulo =new Capitulo(idu,fechaCreacion,formulario_id,fechaActualizacion,numero_capitulo,titulo_capitulo);
                 capitulos.add(capitulo);

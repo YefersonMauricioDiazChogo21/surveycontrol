@@ -9,30 +9,34 @@ import java.util.Scanner;
 
 public class iu {
     public static void mainMenu(){
-        System.out.println("Farmacy");
+        System.out.println("Quest Control");
         Scanner scanner = new Scanner(System.in);
 
         boolean flag =true;
-        String menu= " 1. Usuarios\n 2. Roles\n 3. Roles usuario\n 4. Categoria Catalogo\n 5. Active Principle\n 6. Unit Measurement\n 7. Mode Administration\n 8. Medicine\n 9. Farmacy\n 10. Laboratory\n 11. Farmacy Madicine\n 12. Salir";
+        String menu= " 1. Usuarios\n 2. Roles\n 3. Roles usuario\n 4. Capitulos\n 6. Preguntas\n 7. Mode Administration\n 8. Medicine\n 9. Formularios\n 10. Respuestas\n 11. Sub Respuestas \n 12. Salir";
         while (flag){
-            AditionalFuntions.clearConsole();
+            
             System.out.println(menu);
             int options= scanner.nextInt();
-
+            AditionalFuntions.clearConsole();
             switch (options){
                 case 1:
-                UsuarioConsoleAdapter csu = new UsuarioConsoleAdapter();
+                    UsuarioConsoleAdapter csu = new UsuarioConsoleAdapter();
                     csu.Start();
+                    AditionalFuntions.clearConsole();
                     break;
                 case 2:
-                RolConsoleAdapter csr = new RolConsoleAdapter();
+                    RolConsoleAdapter csr = new RolConsoleAdapter();
                     csr.Start();
+                    AditionalFuntions.clearConsole();
                     break;
                 case 3:
-                RolUsuarioConsoleAdapter csru = new RolUsuarioConsoleAdapter();
+                    RolUsuarioConsoleAdapter csru = new RolUsuarioConsoleAdapter();
                     csru.Start();
+                    AditionalFuntions.clearConsole();
                     break;
                 case 4:
+                    AditionalFuntions.clearConsole();
                     break;
                 case 5:
                     break;

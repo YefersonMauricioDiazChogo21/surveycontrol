@@ -1,21 +1,19 @@
 package com.questcontrol.funtions;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AditionalFuntions {
     public static void clearConsole(){
     try {
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
+        if (System.getProperty("os.name").contains("Windows")) {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } else {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+            new ProcessBuilder("clear").inheritIO().start().waitFor();
         }
-    } catch (Exception e) {
-        System.out.println("Error al limpiar la consola: " + e.getMessage());
-        e.printStackTrace();
+    } catch (IOException |InterruptedException ex) {
+        ex.printStackTrace();
     }
 }
 
