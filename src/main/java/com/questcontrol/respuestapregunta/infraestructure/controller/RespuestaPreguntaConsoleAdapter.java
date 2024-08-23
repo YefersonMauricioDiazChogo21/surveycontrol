@@ -1,4 +1,4 @@
-package com.questcontrol.capitulo.infraestructure.controller;
+package com.questcontrol.respuestapregunta.infraestructure.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,40 +9,40 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import com.questcontrol.funtions.AditionalFuntions;
-import com.questcontrol.capitulo.app.CreateCapituloUseCase;
-import com.questcontrol.capitulo.app.DeleteCapituloUseCase;
-import com.questcontrol.capitulo.app.FindAllCapitulosUseCase;
-import com.questcontrol.capitulo.app.FindCapituloByIdUseCase;
-import com.questcontrol.capitulo.app.UpdateCapituloUseCase;
-import com.questcontrol.capitulo.domain.entity.Capitulo;
-import com.questcontrol.capitulo.domain.service.CapituloService;
-import com.questcontrol.capitulo.infraestructure.repository.CapituloRepository;
+import com.questcontrol.rol.app.CreateRolUseCase;
+import com.questcontrol.rol.app.DeleteRolUseCase;
+import com.questcontrol.rol.app.FindAllRolesUseCase;
+import com.questcontrol.rol.app.FindRolByIdUseCase;
+import com.questcontrol.rol.app.UpdateRolUseCase;
+import com.questcontrol.rol.domain.entity.Rol;
+import com.questcontrol.rol.domain.service.RolService;
+import com.questcontrol.rol.infraestructure.repository.RolRepository;
 
-public class CapituloConsoleAdapter {
-    private CapituloService capituloService;
-    private CreateCapituloUseCase createCapitulo;
-    private DeleteCapituloUseCase deleteCapitulo;
-    private UpdateCapituloUseCase updateCapitulo;
-    private FindAllCapitulosUseCase allCapitulos;
-    private FindCapituloByIdUseCase findCapitulo;
+public class RespuestaPreguntaConsoleAdapter {
+    private RolService rolService;
+    private CreateRolUseCase createRol;
+    private DeleteRolUseCase deleteRol;
+    private UpdateRolUseCase updateRol;
+    private FindAllRolesUseCase allRoles;
+    private FindRolByIdUseCase findRol;
     Scanner scanner = new Scanner(System.in);
 
-    public CapituloConsoleAdapter() {
-        this.capituloService = new CapituloRepository();
-        this.createCapitulo= new CreateCapituloUseCase(capituloService);
-        this.deleteCapitulo = new DeleteCapituloUseCase(capituloService);
-        this.updateCapitulo= new UpdateCapituloUseCase(capituloService);
-        this.allCapitulos = new FindAllCapitulosUseCase(capituloService);
-        this.findCapitulo = new FindCapituloByIdUseCase(capituloService);
+    public RolConsoleAdapter() {
+        this.rolService = new RolRepository();
+        this.createRol= new CreateRolUseCase(rolService);
+        this.deleteRol = new DeleteRolUseCase(rolService);
+        this.updateRol= new UpdateRolUseCase(rolService);
+        this.allRoles = new FindAllRolesUseCase(rolService);
+        this.findRol = new FindRolByIdUseCase(rolService);
     }
 
     public void Start(){
     String menu = """
-                        1. Agregar capitulo
-                        2. Eliminar capitulo
-                        3. Listar todos los capitulos
-                        4. Buscar capitulo por id
-                        5. Actualizar capitulo
+                        1. Agregar rol
+                        2. Eliminar rol
+                        3. Listar todos los roles
+                        4. Buscar rol por id
+                        5. Actualizar rol
                         6. Salir
                         """;
     System.out.println(menu);
@@ -57,9 +57,9 @@ public class CapituloConsoleAdapter {
         switch (opcion) {
             case 1:
 
-                String idForm = JOptionPane.showInputDialog(null, "Ingrese el id del formulario del capitulo: ");
-                String idFor = JOptionPane.showInputDialog(null, "Ingrese el id del formulario del capitulo: ");
-                Capitulo capitulo = new Capitulo(idForm,);
+                String newrol = JOptionPane.showInputDialog(null, "Ingrese el rol: ");
+                
+                Rol rol = new Rol(newrol);
                 createRol.execute(rol);
                 Start();
 

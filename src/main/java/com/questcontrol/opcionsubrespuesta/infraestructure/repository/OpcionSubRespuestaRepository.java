@@ -1,4 +1,4 @@
-package com.questcontrol.opcionsubrespuesta.infraestructure;
+package com.questcontrol.opcionsubrespuesta.infraestructure.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
