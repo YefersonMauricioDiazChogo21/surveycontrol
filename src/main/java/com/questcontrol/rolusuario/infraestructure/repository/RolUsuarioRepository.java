@@ -19,7 +19,7 @@ public class RolUsuarioRepository implements RolUsuarioService{
 
     @Override
     public void createRolUsuario(RolUsuario rolusuario) {
-         String sql ="INSERT INTO rol_id,rol_usuario(usuario_id) VALUES (?,?)";
+         String sql ="INSERT INTO rol_usuario(rol_id,usuario_id) VALUES (?,?)";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
             ps.setInt(1, rolusuario.getUsuario_id());
@@ -33,7 +33,7 @@ public class RolUsuarioRepository implements RolUsuarioService{
 
     @Override
     public RolUsuario deleteRolUsuario(int id) {
-        String sql ="DELETE FROM rol_usuario WHERE id = ?";
+        String sql ="DELETE FROM rol_usuario WHERE usuario_id = ?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
             ps.setInt(1, id);
@@ -47,12 +47,12 @@ public class RolUsuarioRepository implements RolUsuarioService{
     }
 
     @Override
-    public void updateRolUsuario(RolUsuario rol, int id) {
-        String sql ="UPDATE rol_usuario SET usuario_id=? WHERE id=?";
+    public void updateRolUsuario(RolUsuario rolUsuario, int id) {
+        String sql ="UPDATE rol_usuario SET rol_id=? WHERE usuario_id=?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps= connection.prepareStatement(sql)){
-            int usuario_id= scanner.nextInt();
-            ps.setInt(1, usuario_id);
+            int rol_id=scanner.nextInt();
+            ps.setInt(1, rol_id);
             ps.setInt(2, id);
             ps.executeUpdate();
             System.out.print("Actualizacion de usuario exitosa");
@@ -63,16 +63,16 @@ public class RolUsuarioRepository implements RolUsuarioService{
 
     @Override
     public Optional<RolUsuario> findRolUsuarioById(int id) {
-        String sql ="SELECT id,usuario_id FROM rol_usuario WHERE id=?";
+        String sql ="SELECT rol_id,usuario_id FROM rol_usuario WHERE usuario_id=?";
         try(Connection connection = Database.getConnection();
         PreparedStatement ps =connection.prepareStatement(sql)){
             ps.setInt(1,id);
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
-                int idu=rs.getInt("id");
+                int rol_id=rs.getInt("rol_id");
                 int usuario_id =rs.getInt("usuario_id");
-                RolUsuario rolusuario =new RolUsuario(idu,usuario_id);
+                RolUsuario rolusuario =new RolUsuario(rol_id,usuario_id);
                 return Optional.of(rolusuario);
             }
         } catch(SQLException e){
@@ -83,7 +83,7 @@ public class RolUsuarioRepository implements RolUsuarioService{
 
     @Override
     public List<RolUsuario> findallRolesUsuario() {
-        String sql ="SELECT id,habilitado,nombre_usuario,contraseña FROM usuario";
+        String sql ="SELECT rol_id,usuario_id FROM rol_usuario";
         List<RolUsuario> rolUsuarios =new ArrayList<>();
 
         try(Connection connection = Database.getConnection();
@@ -91,9 +91,9 @@ public class RolUsuarioRepository implements RolUsuarioService{
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
-                int idu=rs.getInt("id");
+                int rol_id=rs.getInt("rol_id");
                 int usuario_id=rs.getInt("usuario_id");
-                RolUsuario rolUsuario =new RolUsuario(idu,usuario_id);
+                RolUsuario rolUsuario =new RolUsuario(rol_id,usuario_id);
                 rolUsuarios.add(rolUsuario);
             }
         } catch(SQLException e){

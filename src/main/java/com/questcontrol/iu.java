@@ -13,7 +13,7 @@ public class iu {
         Scanner scanner = new Scanner(System.in);
 
         boolean flag =true;
-        String menu= " 1. Usuarios\n 2. Roles\n 3. Roles usuario\n 4. Customer\n 5. Active Principle\n 6. Unit Measurement\n 7. Mode Administration\n 8. Medicine\n 9. Farmacy\n 10. Laboratory\n 11. Farmacy Madicine\n 12. Salir";
+        String menu= " 1. Usuarios\n 2. Roles\n 3. Roles usuario\n 4. Categoria Catalogo\n 5. Active Principle\n 6. Unit Measurement\n 7. Mode Administration\n 8. Medicine\n 9. Farmacy\n 10. Laboratory\n 11. Farmacy Madicine\n 12. Salir";
         while (flag){
             AditionalFuntions.clearConsole();
             System.out.println(menu);

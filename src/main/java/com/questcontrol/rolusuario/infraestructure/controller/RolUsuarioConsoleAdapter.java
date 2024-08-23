@@ -55,16 +55,18 @@ public class RolUsuarioConsoleAdapter {
     public void ejecutar(int opcion) {
         switch (opcion) {
             case 1:
-            
+
+                int rol_id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del rol: "));
                 int usuario_id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del usuario: "));
-                RolUsuario rolUsuario = new RolUsuario(usuario_id);
+
+                RolUsuario rolUsuario = new RolUsuario(rol_id,usuario_id);
                 createRolUsuario.execute(rolUsuario);
                 Start();
 
                 break;
             case 2:
                 try {
-                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del rol_usuario para eliminar: ");
+                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del usuario para eliminar rol: ");
                     int ideliminado = Integer.parseInt(idaeliminar);
                     deleteRolUsuario.execute(ideliminado);
                     Start();
@@ -133,19 +135,25 @@ public class RolUsuarioConsoleAdapter {
                 while (bandera) {
                     
                     String opcionesActualizar = """
-                        1. Usuario id
+                        1. Rol id
+                        3. Usuario id
                         2. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,4);
+                    Integer opc = AditionalFuntions.menuValidator(1,3);
 
                    
                     switch (opc) {
                         case 1:
-                            rolUsuarioActalizar.setUsuario_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo id del usuario")));
+                            rolUsuarioActalizar.setRol_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo id del rol")));
                             break;
                         case 2:
+                            rolUsuarioActalizar.setUsuario_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo id del usuario")));
+                            break;
+                        case 3:
                             bandera = false;
+                            break;
+                        default:
                             break;
                         }
                         
