@@ -49,20 +49,20 @@ public class UsuarioConsoleAdapter {
     Integer opcion = AditionalFuntions.menuValidator(1,6);
 
     ejecutar(opcion);
-    
-
   
+    }
+    public void addUser(){
+        String nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre: ");
+        String contraseña = JOptionPane.showInputDialog(null, "Ingrese una contraseña: ");
+        Usuario usuario = new Usuario(true, nombre, contraseña);
+        createUsuario.execute(usuario);
+        
     }
     public void ejecutar(int opcion) {
         switch (opcion) {
             case 1:
-
-                String nombre = JOptionPane.showInputDialog(null, "Ingrese su nombre: ");
-                String contraseña = JOptionPane.showInputDialog(null, "Ingrese una contraseña: ");
-                Usuario usuario = new Usuario(true, nombre, contraseña);
-                createUsuario.execute(usuario);
+                addUser();
                 Start();
-
                 break;
             case 2:
                 try {

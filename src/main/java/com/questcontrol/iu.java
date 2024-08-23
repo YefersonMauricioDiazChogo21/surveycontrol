@@ -11,6 +11,7 @@ import com.questcontrol.respuestapregunta.infraestructure.controller.RespuestaPr
 import com.questcontrol.usuario.infraestructure.controller.UsuarioConsoleAdapter;
 import com.questcontrol.rol.infraestructure.controller.RolConsoleAdapter;
 import com.questcontrol.rolusuario.infraestructure.controller.RolUsuarioConsoleAdapter;
+import javax.swing.JOptionPane;
 
 import java.util.Scanner;
 
@@ -23,8 +24,8 @@ public class iu {
         String menu= " 1. Usuarios\n 2. Roles\n 3. Roles usuario\n 4. Capitulos\n 5.Categoria Catalogo\n 6. Preguntas\n 7. Formularios\n 8. Respuestas\n 9. Sub Respuestas \n 10. Respuestas preguntas \n 11. Salir";
         while (flag){
             
-            System.out.println(menu);
-            int options= scanner.nextInt();
+            ;
+            int options = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
             AditionalFuntions.clearConsole();
             switch (options){
                 case 1:
@@ -83,6 +84,7 @@ public class iu {
                     break;
                 default:
                     System.out.println("Invalid Option, Try again.");
+                    break;
             }
         }
         scanner.close();
