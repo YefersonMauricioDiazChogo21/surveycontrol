@@ -57,10 +57,10 @@ public class OpcionSubRespuestaConsoleAdapter {
         switch (opcion) {
             case 1: 
 
-                int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el rol: "));
-                int opcion_respuesta_id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el rol: "));
-                String tipo_componente_html = JOptionPane.showInputDialog(null, "Ingrese el rol: ");
-                String subrespueta_text = JOptionPane.showInputDialog(null, "Ingrese el rol: ");
+                int numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el numero de subrespuesta: "));
+                int opcion_respuesta_id = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ide dela opcion de respuesta: "));
+                String tipo_componente_html = JOptionPane.showInputDialog(null, "Ingrese el tipo de componente html: ");
+                String subrespueta_text = JOptionPane.showInputDialog(null, "Ingrese el texto de la subrespuesta: ");
                 
                 OpcionSubRespuesta rol = new OpcionSubRespuesta(numero,opcion_respuesta_id,tipo_componente_html,subrespueta_text);
                 createOpcionSubRespuesta.execute(rol);
@@ -69,7 +69,7 @@ public class OpcionSubRespuestaConsoleAdapter {
                 break;
             case 2:
                 try {
-                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del rol para eliminar: ");
+                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id de la subrespuesta para eliminar: ");
                     int ideliminado = Integer.parseInt(idaeliminar);
                     deleteOpcionSubRespuesta.execute(ideliminado);
                     Start();
@@ -81,15 +81,20 @@ public class OpcionSubRespuestaConsoleAdapter {
                 
                 break;
             case 3:
-                StringBuilder salida = new StringBuilder("Usuarios:\n");
+                StringBuilder salida = new StringBuilder("Sub respuestas:\n");
                 List<OpcionSubRespuesta> role = allOpcionesSubRespuesta.execute();
                 for (OpcionSubRespuesta rols : role) {
                     int id = rols.getId();
                     int numerosubrespuesta = rols.getNumero_subrespuesta();
-                    
+                    int opcionresid = rols.getOpcion_respuesta_id();
+                    String tipohtml = rols.getTipo_componente_html();
+                    String text = rols.getSubrespueta_text();
 
                     salida.append("ID: ").append(id).append("\n")
-                    .append("Nombre: ").append(numerosubrespuesta);
+                    .append("Numero subrespuesta: ").append(numerosubrespuesta).append("\n")
+                    .append("Id opcion respuessta: ").append(opcionresid).append("\n")
+                    .append("Tipo html: ").append(tipohtml).append("\n")
+                    .append("Texto: ").append(text);
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -105,7 +110,7 @@ public class OpcionSubRespuestaConsoleAdapter {
                 break;
             case 4:
                 try {
-                    String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id del rol pque desea buscar: ");
+                    String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id de la sub respuesta que desea buscar: ");
                     int idbuscar = Integer.parseInt(idusuario);
                     Optional<OpcionSubRespuesta> dato = findOpcionSubRespuesta.execute(idbuscar);
                     StringBuilder salidaid = new StringBuilder("roles:\n");
@@ -113,10 +118,16 @@ public class OpcionSubRespuestaConsoleAdapter {
                         OpcionSubRespuesta datopre = dato.get();
                         int id = datopre.getId();
                         int numerosubrespuesta = datopre.getNumero_subrespuesta();
+                        int opcionresid = datopre.getOpcion_respuesta_id();
+                        String tipohtml = datopre.getTipo_componente_html();
+                        String text = datopre.getSubrespueta_text();
     
                         
                         salidaid.append("ID: ").append(id).append("\n")
-                            .append("Nombre: ").append(numerosubrespuesta);
+                        .append("Numero subrespuesta: ").append(numerosubrespuesta).append("\n")
+                        .append("Id opcion respuessta: ").append(opcionresid).append("\n")
+                        .append("Tipo html: ").append(tipohtml).append("\n")
+                        .append("Texto: ").append(text);
                     } 
                     JOptionPane.showMessageDialog(null, salidaid);
                     Start();
@@ -138,8 +149,10 @@ public class OpcionSubRespuestaConsoleAdapter {
                 while (bandera) {
                     
                     String opcionesActualizar = """
-                        1. Nombre rol
-                        2. Salir
+                        1. Id de la opcion de respuesta
+                        2. Tipo de html
+                        3. Texto
+                        4. Salir
                         """;
                     System.out.println(opcionesActualizar);
                     Integer opc = AditionalFuntions.menuValidator(1,2);
@@ -147,9 +160,15 @@ public class OpcionSubRespuestaConsoleAdapter {
                    
                     switch (opc) {
                         case 1:
-                            rolActalizar.setNumero_subrespuesta(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol")));
+                            rolActalizar.setOpcion_respuesta_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo id de la opcion de respuesta asosiado")));
                             break;
                         case 2:
+                            rolActalizar.setTipo_componente_html(JOptionPane.showInputDialog(null, "Ingrese el nuevo tipo de componente html"));
+                            break;
+                        case 3:
+                            rolActalizar.setSubrespueta_text(JOptionPane.showInputDialog(null, "Ingrese el nuevo texto de la subrespuesta"));
+                            break;
+                        case 4:
                             bandera = false;
                             break;
                         }

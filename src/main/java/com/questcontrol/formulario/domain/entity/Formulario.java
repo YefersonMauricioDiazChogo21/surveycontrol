@@ -17,6 +17,14 @@ public class Formulario {
         this.nombre = nombre;
     }
 
+    
+
+    public Formulario(int id, String descripcion, String nombre) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.nombre = nombre;
+    }
+
     public Formulario(Timestamp fecha_creacion, Timestamp fecha_actualizacion, String descripcion, String nombre) {
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;

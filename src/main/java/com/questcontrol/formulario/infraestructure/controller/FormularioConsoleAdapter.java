@@ -108,7 +108,7 @@ public class FormularioConsoleAdapter {
                     String idusuario = JOptionPane.showInputDialog(null, "Ingrese el id del formulario que desea buscar: ");
                     int idbuscar = Integer.parseInt(idusuario);
                     Optional<Formulario> dato = findFormulario.execute(idbuscar);
-                    StringBuilder salidaid = new StringBuilder("roles:\n");
+                    StringBuilder salidaid = new StringBuilder("Formularios:\n");
                     if (dato.isPresent()) {
                         Formulario datopre = dato.get();
                         int id = datopre.getId();
@@ -140,8 +140,8 @@ public class FormularioConsoleAdapter {
                 while (bandera) {
                     
                     String opcionesActualizar = """
-                        1. Nombre rol
-                        2. Descripcion del rol
+                        1. Nombre 
+                        2. Descripcion del Folmulario
                         3. Salir
                         """;
                     System.out.println(opcionesActualizar);

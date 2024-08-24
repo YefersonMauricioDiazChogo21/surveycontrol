@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class Database {
     private static final String URL ="jdbc:mysql://localhost:3306/questcontrol";
-    private static final String USSER ="campus2023";
-    private static final String PASSWORD="campus2023";
+    private static final String USSER ="root";
+    private static final String PASSWORD="123456789";
 
     public static Connection getConnection() throws SQLException{
         return DriverManager.getConnection(URL ,USSER, PASSWORD);

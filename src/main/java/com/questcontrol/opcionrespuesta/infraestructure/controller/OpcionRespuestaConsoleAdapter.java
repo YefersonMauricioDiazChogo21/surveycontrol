@@ -87,11 +87,22 @@ public class OpcionRespuestaConsoleAdapter {
                 List<OpcionRespuesta> opcions = allOpcionesRespuesta.execute();
                 for (OpcionRespuesta opciones : opcions) {
                     int id = opciones.getId();
-                    int namerol = opciones.getCatalogo_id();
-                    
+                    int valoropcion = opciones.getValor_opcion();
+                    int catalogoi_d = opciones.getCatalogo_id();
+                    int respuestaparentId = opciones.getRespuesta_padre_id();
+                    int preguntaid = opciones.getPregunta_id();
+                    String tipohtml =opciones.getTipo_componente_html();
+                    String comentario=opciones.getComentario_pregunta();
+                    String text=opciones.getOpcion_text();
 
                     salida.append("ID: ").append(id).append("\n")
-                    .append("Nombre: ").append(namerol).append(", ");
+                    .append("Valor: ").append(valoropcion).append("\n")
+                    .append("Id catalogo: ").append(catalogoi_d).append("\n")
+                    .append("Id padre: ").append(respuestaparentId).append("\n")
+                    .append("Id pregunta: ").append(preguntaid).append("\n")
+                    .append("Tipo html: ").append(tipohtml).append("\n")
+                    .append("Comentario: ").append(comentario).append("\n")
+                    .append("Texto: ").append(text);
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -114,11 +125,22 @@ public class OpcionRespuestaConsoleAdapter {
                     if (dato.isPresent()) {
                         OpcionRespuesta datopre = dato.get();
                         int id = datopre.getId();
-                        int catalogo_id = datopre.getCatalogo_id();
-    
+                        int valoropcion = datopre.getValor_opcion();
+                        int catalogoi_d = datopre.getCatalogo_id();
+                        int respuestaparentId = datopre.getRespuesta_padre_id();
+                        int preguntaid = datopre.getPregunta_id();
+                        String tipohtml =datopre.getTipo_componente_html();
+                        String comentario=datopre.getComentario_pregunta();
+                        String text=datopre.getOpcion_text();
                         
                         salidaid.append("ID: ").append(id).append("\n")
-                            .append("Nombre: ").append(catalogo_id);
+                        .append("Valor: ").append(valoropcion).append("\n")
+                        .append("Id catalogo: ").append(catalogoi_d).append("\n")
+                        .append("Id padre: ").append(respuestaparentId).append("\n")
+                        .append("Id pregunta: ").append(preguntaid).append("\n")
+                        .append("Tipo html: ").append(tipohtml).append("\n")
+                        .append("Comentario: ").append(comentario).append("\n")
+                        .append("Texto: ").append(text);
                     } 
                     JOptionPane.showMessageDialog(null, salidaid);
                     Start();

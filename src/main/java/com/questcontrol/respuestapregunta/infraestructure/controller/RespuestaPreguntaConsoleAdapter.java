@@ -38,11 +38,11 @@ public class RespuestaPreguntaConsoleAdapter {
 
     public void Start(){
     String menu = """
-                        1. Agregar rol
-                        2. Eliminar rol
-                        3. Listar todos los roles
-                        4. Buscar rol por id
-                        5. Actualizar rol
+                        1. Agregar Respuesta
+                        2. Eliminar Respuesta
+                        3. Listar todos los Respuesta
+                        4. Buscar Respuesta por id
+                        5. Actualizar Respuesta
                         6. Salir
                         """;
     System.out.println(menu);
@@ -56,17 +56,18 @@ public class RespuestaPreguntaConsoleAdapter {
     public void ejecutar(int opcion) {
         switch (opcion) {
             case 1:
-                int respuestaid =Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el rol: "));
-                String newrol = JOptionPane.showInputDialog(null, "Ingrese el rol: ");
+                int opcionrespuestaid =Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id la respuesta: "));
+                int opcionsubrespuestaid =Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id la subrespuesta: "));
+                String newrol = JOptionPane.showInputDialog(null, "Ingrese el texto de la respuesta: ");
                 
-                RespuestaPregunta rol = new RespuestaPregunta(respuestaid,respuestaid,respuestaid,newrol);
+                RespuestaPregunta rol = new RespuestaPregunta(opcionrespuestaid,opcionsubrespuestaid,newrol);
                 createRespuestaPregunta.execute(rol);
                 Start();
 
                 break;
             case 2:
                 try {
-                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id del rol para eliminar: ");
+                    String idaeliminar = JOptionPane.showInputDialog(null, "Ingrese el id de la respuesta para eliminar: ");
                     int ideliminado = Integer.parseInt(idaeliminar);
                     deleteRespuestaPregunta.execute(ideliminado);
                     Start();
@@ -78,15 +79,19 @@ public class RespuestaPreguntaConsoleAdapter {
                 
                 break;
             case 3:
-                StringBuilder salida = new StringBuilder("Usuarios:\n");
+                StringBuilder salida = new StringBuilder("Respuestas:\n");
                 List<RespuestaPregunta> role = allRespuestasPregunta.execute();
                 for (RespuestaPregunta rols : role) {
                     int id = rols.getId();
                     int respuesta_id = rols.getRespuesta_id();
+                    int subrespuesta_id = rols.getSubrespuesta_id();
+                    String text =rols.getRespuesta_text();
                     
 
                     salida.append("ID: ").append(id).append("\n")
-                    .append("Nombre: ").append(respuesta_id).append(", ");
+                    .append("Respuesta id: ").append(respuesta_id).append("\n")
+                    .append("Subrespueata id: ").append(subrespuesta_id).append("\n")
+                    .append("Texto respuesta: ").append(text);
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -96,7 +101,7 @@ public class RespuestaPreguntaConsoleAdapter {
                 JScrollPane scrollPane = new JScrollPane(textArea);
                 scrollPane.setPreferredSize(new java.awt.Dimension(400, 300)); 
                
-                JOptionPane.showMessageDialog(null, scrollPane, "RespuestaPreguntaes", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, scrollPane, "RespuestaPreguntas", JOptionPane.INFORMATION_MESSAGE);
                 
                 Start();
                 break;
@@ -110,10 +115,14 @@ public class RespuestaPreguntaConsoleAdapter {
                         RespuestaPregunta datopre = dato.get();
                         int id = datopre.getId();
                         int respuesta_id = datopre.getRespuesta_id();
+                        int subrespuesta_id = datopre.getSubrespuesta_id();
+                        String text =datopre.getRespuesta_text();
     
                         
                         salidaid.append("ID: ").append(id).append("\n")
-                            .append("Nombre: ").append(respuesta_id);
+                        .append("Respuesta id: ").append(respuesta_id).append("\n")
+                        .append("Subrespueata id: ").append(subrespuesta_id).append("\n")
+                        .append("Texto respuesta: ").append(text);
                     } 
                     JOptionPane.showMessageDialog(null, salidaid);
                     Start();
@@ -135,18 +144,26 @@ public class RespuestaPreguntaConsoleAdapter {
                 while (bandera) {
                     
                     String opcionesActualizar = """
-                        1. Nombre rol
-                        2. Salir
+                        1. Id respuesta
+                        2. Id Subrespuesta
+                        3. Texto Respuesta
+                        4. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,2);
+                    Integer opc = AditionalFuntions.menuValidator(1,4);
 
                    
                     switch (opc) {
                         case 1:
-                            rolActalizar.setRespuesta_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo Nombre del rol")));
+                            rolActalizar.setRespuesta_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo id de Respuesta")));
                             break;
                         case 2:
+                            rolActalizar.setSubrespuesta_id(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el nuevo id de subrespuesta")));
+                            break;
+                        case 3:
+                            rolActalizar.setRespuesta_text(JOptionPane.showInputDialog(null, "Ingrese el nuevo texto de la respuesta"));
+                            break;
+                        case 4:
                             bandera = false;
                             break;
                         }
