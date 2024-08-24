@@ -46,8 +46,7 @@ public class RolConsoleAdapter {
                         6. Salir
                         """;
     System.out.println(menu);
-    Integer opcion =scanner.nextInt();
-
+    Integer opcion = AditionalFuntions.menuValidator(1,6,menu);
     ejecutar(opcion);
     
 
@@ -139,7 +138,7 @@ public class RolConsoleAdapter {
                         2. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,2);
+                    Integer opc = AditionalFuntions.menuValidator(1,2,opcionesActualizar);
 
                    
                     switch (opc) {

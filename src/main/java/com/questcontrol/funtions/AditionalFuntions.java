@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class AditionalFuntions {
     public static void clearConsole(){
     try {
@@ -17,13 +19,12 @@ public class AditionalFuntions {
     }
 }
 
-public static int menuValidator(int start, int end){
+public static int menuValidator(int start, int end,String menu){
     Scanner scanner = new Scanner(System.in);
-    int number;
     boolean isValid = false;
     while (!isValid) {
         try {
-            number = scanner.nextInt();
+            Integer number =Integer.parseInt(JOptionPane.showInputDialog(null,menu));
             
             if (number >= start && number <= end) {
                 isValid = true;

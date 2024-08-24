@@ -46,7 +46,7 @@ public class PreguntaConsoleAdapter {
                         6. Salir
                         """;
     System.out.println(menu);
-    Integer opcion =scanner.nextInt();
+    Integer opcion = AditionalFuntions.menuValidator(1,6,menu);
 
     ejecutar(opcion);
     
@@ -159,7 +159,7 @@ public class PreguntaConsoleAdapter {
                         4. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,4);
+                    Integer opc = AditionalFuntions.menuValidator(1,4,opcionesActualizar);
 
                    
                     switch (opc) {

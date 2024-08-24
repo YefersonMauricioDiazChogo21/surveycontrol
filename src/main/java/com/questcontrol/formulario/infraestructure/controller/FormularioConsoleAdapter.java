@@ -46,7 +46,7 @@ public class FormularioConsoleAdapter {
                         6. Salir
                         """;
     System.out.println(menu);
-    Integer opcion =scanner.nextInt();
+    Integer opcion =Integer.parseInt(JOptionPane.showInputDialog(null,menu));
 
     ejecutar(opcion);
     
@@ -145,7 +145,7 @@ public class FormularioConsoleAdapter {
                         3. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,2);
+                    Integer opc = AditionalFuntions.menuValidator(1,2,opcionesActualizar);
 
                    
                     switch (opc) {

@@ -45,7 +45,7 @@ public class RolUsuarioConsoleAdapter {
                         6. Salir
                         """;
     System.out.println(menu);
-    Integer opcion = AditionalFuntions.menuValidator(1,6);
+    Integer opcion = AditionalFuntions.menuValidator(1,6,menu);
 
     ejecutar(opcion);
     
@@ -140,7 +140,7 @@ public class RolUsuarioConsoleAdapter {
                         2. Salir
                         """;
                     System.out.println(opcionesActualizar);
-                    Integer opc = AditionalFuntions.menuValidator(1,3);
+                    Integer opc = AditionalFuntions.menuValidator(1,3,opcionesActualizar);
 
                    
                     switch (opc) {
