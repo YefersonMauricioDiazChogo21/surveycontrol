@@ -109,7 +109,7 @@ public class OpcionRespuestaRepository implements OpcionRespuestaService{
 
     @Override
     public List<OpcionRespuesta> findAllOpcionesRespuesta() {
-        String sql ="SELECT id,valor_opcion,catalogo_id,,fecha_creacion, fecha_actualizacion, respuesta_padre_id,pregunta_id,tipo_componente_html,comentario_pregunta,opcion_text FROM opcion_respuesta WHERE id=?";
+        String sql ="SELECT id,valor_opcion,catalogo_id,,fecha_creacion, fecha_actualizacion, respuesta_padre_id,pregunta_id,tipo_componente_html,comentario_pregunta,opcion_text FROM opcion_respuesta";
         List<OpcionRespuesta> opcionesRespuesta =new ArrayList<>();
 
         try(Connection connection = Database.getConnection();

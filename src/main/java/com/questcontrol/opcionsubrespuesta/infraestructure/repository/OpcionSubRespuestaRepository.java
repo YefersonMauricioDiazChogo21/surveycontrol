@@ -97,7 +97,7 @@ public class OpcionSubRespuestaRepository implements OpcionSubRespuestaService{
 
     @Override
     public List<OpcionSubRespuesta> findAllOpcionesSubRespuesta() {
-        String sql ="SELECT id,numero_subrespuesta,fecha_creacion, fecha_actualizacion, opcion_respuesta_id,tipo_componente_html,subrespueta_text FROM opcion_subrespuesta WHERE id=?";
+        String sql ="SELECT id,numero_subrespuesta,fecha_creacion, fecha_actualizacion, opcion_respuesta_id,tipo_componente_html,subrespueta_text FROM opcion_subrespuesta";
         List<OpcionSubRespuesta> opcionesSubRespuesta= new ArrayList<>();
         try(Connection connection = Database.getConnection();
         PreparedStatement ps =connection.prepareStatement(sql)){

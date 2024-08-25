@@ -101,7 +101,7 @@ public class PreguntaRepository implements PreguntaService{
 
     @Override
     public List<Pregunta> findAllPreguntas() {
-        String sql ="SELECT id,capitulo_id,fecha_creacion, fecha_actualizacion,numero_pregunta,tipo_respuesta,comentario_pregunta,texto_pregunta FROM pregunta WHERE id=?";
+        String sql ="SELECT id,capitulo_id,fecha_creacion, fecha_actualizacion,numero_pregunta,tipo_respuesta,comentario_pregunta,texto_pregunta FROM pregunta";
         List<Pregunta> preguntas =new ArrayList<>();
 
         try(Connection connection = Database.getConnection();

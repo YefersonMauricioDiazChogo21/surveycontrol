@@ -93,7 +93,7 @@ public class CapituloRepository implements CapituloService {
 
     @Override
     public List<Capitulo> findAllCapitulos() {
-        String sql ="SELECT id,fecha_creacion,formulario_id, fecha_actualizacion,numero_capitulo,titulo_capitulo FROM capitulo WHERE id=?";
+        String sql ="SELECT id,fecha_creacion,formulario_id, fecha_actualizacion,numero_capitulo,titulo_capitulo FROM capitulo";
         List<Capitulo> capitulos =new ArrayList<>();
         
         try(Connection connection = Database.getConnection();
