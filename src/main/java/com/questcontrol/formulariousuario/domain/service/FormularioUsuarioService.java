@@ -1,6 +1,5 @@
 package com.questcontrol.formulariousuario.domain.service;
 
-import java.util.Optional;
 import java.util.List;
 
 import com.questcontrol.capitulo.domain.entity.Capitulo;
@@ -15,6 +14,6 @@ public interface FormularioUsuarioService {
     List<CategoriaCatalogo> findCategoriaCatalogoByIdForm ();
     List<Capitulo> findCapitulosByIdForm (int id);
     List<Pregunta> findPreguntasByIdForm (int id);
-    List<OpcionRespuesta> findOpcionRespuestaByIdCapitulo();
+    List<OpcionRespuesta> findOpcionRespuestaByIdCapitulo(int id);
     List<OpcionSubRespuesta> findOpcionesSubRespuestaoByIdCapitulo ();
 }

@@ -104,9 +104,34 @@ public class FormularioUsuarioRepository implements FormularioUsuarioService{
     }
 
     @Override
-    public List<OpcionRespuesta> findOpcionRespuestaByIdCapitulo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findOpcionRespuestaByIdCapitulo'");
+    public List<OpcionRespuesta> findOpcionRespuestaByIdCapitulo(int id) {
+        String sql ="SELECT id,valor_opcion,catalogo_id,,fecha_creacion, fecha_actualizacion, respuesta_padre_id,pregunta_id,tipo_componente_html,comentario_pregunta,opcion_text FROM opcion_respuesta WHERE id=?";
+        List<OpcionRespuesta> opcionesRespuesta =new ArrayList<>();
+
+        try(Connection connection = Database.getConnection();
+        PreparedStatement ps =connection.prepareStatement(sql)){
+            ps.setInt(1,id);
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                int idu=rs.getInt("id");
+                int valor_opcion=rs.getInt("valor_opcion");
+                int catalogo_id=rs.getInt("catalogo_id");
+                java.sql.Timestamp fechaCreacion = rs.getTimestamp("fecha_creacion");
+                int respuesta_padre_id=rs.getInt("respuesta_padre_id");
+                int pregunta_id=rs.getInt("pregunta_id");
+                java.sql.Timestamp fechaActualizacion = rs.getTimestamp("fecha_actualizacion");
+                String tipo_componente_html= rs.getString("tipo_componente_html");
+                String comentario_pregunta =rs.getString("comentario_pregunta");
+                String opcion_text =rs.getString("texto_pregunta");
+                
+                OpcionRespuesta opcionRespuesta =new OpcionRespuesta(idu,valor_opcion,catalogo_id,fechaCreacion,respuesta_padre_id,pregunta_id,fechaActualizacion,tipo_componente_html,comentario_pregunta,opcion_text);
+                opcionesRespuesta.add(opcionRespuesta);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+		return opcionesRespuesta;
     }
 
     @Override

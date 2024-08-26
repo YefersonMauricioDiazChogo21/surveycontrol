@@ -79,7 +79,6 @@ public static int menuValidator(int start, int end,String menu){
 
                         while(rs.next()){
                             int rol_id=rs2.getInt("rol_id");
-                            int usuario_id =rs2.getInt("usuario_id");
                             if(rol_id==1){
                                 if (habilitado==true){
                                     return true;

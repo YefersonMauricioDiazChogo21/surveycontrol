@@ -39,10 +39,7 @@ public class GeneradorFormularioConsoleAdapter {
         List<Formulario> form = allFormularios.execute();
         for (Formulario forms : form) {
             int id = forms.getId();
-            String descripcion = forms.getDescripcion();
             String nameform = forms.getNombre();
-            java.sql.Timestamp fechaCreacion = forms.getFecha_creacion();
-            
 
             salida.append("ID: ").append(id).append("\n").append("Nombre: ").append(nameform).append("\n");
 
