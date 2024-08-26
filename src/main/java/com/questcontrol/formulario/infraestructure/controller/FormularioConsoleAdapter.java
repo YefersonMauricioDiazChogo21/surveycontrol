@@ -45,7 +45,6 @@ public class FormularioConsoleAdapter {
                         5. Actualizar formulario
                         6. Salir
                         """;
-    System.out.println(menu);
     Integer opcion =Integer.parseInt(JOptionPane.showInputDialog(null,menu));
 
     ejecutar(opcion);
@@ -89,7 +88,7 @@ public class FormularioConsoleAdapter {
                     
 
                     salida.append("ID: ").append(id).append("\n").append("Descripcion: ").append(descripcion)
-                    .append("Nombre: ").append(nameform).append(", ").append("Fecha Creacion: ").append(fechaCreacion);
+                    .append("Nombre: ").append(nameform).append(", ").append("Fecha Creacion: ").append(fechaCreacion).append("\n");
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());

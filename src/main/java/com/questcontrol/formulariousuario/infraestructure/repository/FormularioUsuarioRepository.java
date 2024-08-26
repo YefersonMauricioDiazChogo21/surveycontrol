@@ -20,7 +20,7 @@ public class FormularioUsuarioRepository implements FormularioUsuarioService{
 
     @Override
     public List<Formulario> findAllFormularios() {
-        String sql ="SELECT id, descripcion,nombre FROM formularios";
+        String sql ="SELECT id, descripcion,nombre FROM formulario";
         List<Formulario> formularios =new ArrayList<>();
 
         try(Connection connection = Database.getConnection();
@@ -30,7 +30,7 @@ public class FormularioUsuarioRepository implements FormularioUsuarioService{
             while(rs.next()){
                 int idu=rs.getInt("id");
                 String descripcion=rs.getString("descripcion");
-                String nombre =rs.getString("nombre_usuario");
+                String nombre =rs.getString("nombre");
                 Formulario formulario =new Formulario(idu,descripcion,nombre);
                 formularios.add(formulario);
             }

@@ -69,8 +69,8 @@ public class iu {
                     AditionalFuntions.clearConsole();
                     break;
                 case 9:
-                    OpcionSubRespuestaConsoleAdapter csrosub = new OpcionSubRespuestaConsoleAdapter();
-                    csrosub.Start();
+                    OpcionSubRespuestaConsoleAdapter csrsub = new OpcionSubRespuestaConsoleAdapter();
+                    csrsub.Start();
                     AditionalFuntions.clearConsole();
                     break;
                 case 10:
@@ -87,6 +87,7 @@ public class iu {
                     break;
             }
         }
+         
         scanner.close();
     }
 }

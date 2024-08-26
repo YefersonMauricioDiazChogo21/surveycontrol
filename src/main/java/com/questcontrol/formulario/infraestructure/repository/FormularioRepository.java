@@ -89,7 +89,7 @@ public class FormularioRepository implements FormularioService {
 
     @Override
     public List<Formulario> findAllFormularios() {
-        String sql ="SELECT id,fecha_creacion,fecha_actualizacion, descripcion,nombre FROM formularios";
+        String sql ="SELECT id,fecha_creacion,fecha_actualizacion, descripcion,nombre FROM formulario";
         List<Formulario> formularios =new ArrayList<>();
 
         try(Connection connection = Database.getConnection();
@@ -101,7 +101,7 @@ public class FormularioRepository implements FormularioService {
                 java.sql.Timestamp fechaCreacion = rs.getTimestamp("fecha_creacion");
                 java.sql.Timestamp fechaActualizacion = rs.getTimestamp("fecha_actualizacion");
                 String descripcion=rs.getString("descripcion");
-                String nombre =rs.getString("nombre_usuario");
+                String nombre =rs.getString("nombre");
                 Formulario formulario =new Formulario(idu,fechaCreacion,fechaActualizacion,descripcion,nombre);
                 formularios.add(formulario);
             }

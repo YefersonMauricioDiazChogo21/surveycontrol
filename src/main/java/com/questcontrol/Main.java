@@ -3,10 +3,13 @@ package com.questcontrol;
 import javax.swing.JOptionPane;
 
 import com.questcontrol.usuario.infraestructure.controller.UsuarioConsoleAdapter;
+import com.questcontrol.formulariousuario.infraestructure.controller.GeneradorFormularioConsoleAdapter;
+
 
 public class Main {
     public static void main(String[] args) {
         UsuarioConsoleAdapter usuario= new UsuarioConsoleAdapter();
+        GeneradorFormularioConsoleAdapter forms = new GeneradorFormularioConsoleAdapter();
 
         String login= """
                 1. SING IN
@@ -21,9 +24,9 @@ public class Main {
                 switch (opcion) {
                     case 1:
                         usuario.addUser();
+                        forms.Start();
                         break;
                     case 2:
-                        
                         iu.mainMenu();
                         break;
                     default:

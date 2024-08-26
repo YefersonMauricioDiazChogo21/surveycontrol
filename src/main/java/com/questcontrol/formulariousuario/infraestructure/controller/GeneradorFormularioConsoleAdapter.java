@@ -2,7 +2,6 @@ package com.questcontrol.formulariousuario.infraestructure.controller;
 
 import com.questcontrol.formulariousuario.domain.service.FormularioUsuarioService;
 import com.questcontrol.formulariousuario.infraestructure.repository.FormularioUsuarioRepository;
-import com.questcontrol.funtions.AditionalFuntions;
 import com.questcontrol.pregunta.domain.entity.Pregunta;
 
 import java.util.List;
@@ -45,8 +44,7 @@ public class GeneradorFormularioConsoleAdapter {
             java.sql.Timestamp fechaCreacion = forms.getFecha_creacion();
             
 
-            salida.append("ID: ").append(id).append("\n").append("Descripcion: ").append(descripcion)
-            .append("Nombre: ").append(nameform).append(", ").append("Fecha Creacion: ").append(fechaCreacion);
+            salida.append("ID: ").append(id).append("\n").append("Nombre: ").append(nameform).append("\n");
 
         }
         JTextArea textArea = new JTextArea(salida.toString());
@@ -65,14 +63,11 @@ public class GeneradorFormularioConsoleAdapter {
                 List<Capitulo> role = allCapitulos.execute(id);
                 for (Capitulo caps : role) {
                     int idc = caps.getId();
-                    int idform = caps.getFormulario_id();
-                    java.sql.Timestamp fechaCreacion = caps.getFecha_creacion();
                     String numCapitulo = caps.getNumero_capitulo();
                     String tituloCapitulo = caps.getTitulo_capitulo();
                     
 
-                    salida.append("ID: ").append(idc).append("\n")
-                    .append("Id formulario: ").append(idform).append(", ").append("Fecha Creacion: ").append(fechaCreacion).append(", ").append("Numero capitulo: ").append(numCapitulo).append(", ").append("Titulo Capitulo: ").append(tituloCapitulo);
+                    salida.append("ID: ").append(idc).append("\n").append(numCapitulo).append(", ").append("Titulo Capitulo: ").append(tituloCapitulo).append("\n");
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());
@@ -94,17 +89,13 @@ public class GeneradorFormularioConsoleAdapter {
                     int idp = preg.getId();
                     int capitul_id = preg.getCapitulo_id();
                     String numero= preg.getNumero_pregunta();
-                    String tipo=preg.getTexto_pregunta();
-                    String comentario=preg.getComentario_pregunta();
                     String texto=preg.getTexto_pregunta();
                     
 
                     salida.append("ID: ").append(idp).append("\n")
                     .append("Capitulo id: ").append(capitul_id).append("\n")
                     .append("Numero pregunta: ").append(numero).append("\n")
-                    .append("Tipo de pregunta: ").append(tipo).append("\n")
-                    .append("Coentarios: ").append(comentario).append("\n")
-                    .append("Texto: ").append(texto);
+                    .append("Texto: ").append(texto).append("\n");
      
                 }
                 JTextArea textArea = new JTextArea(salida.toString());

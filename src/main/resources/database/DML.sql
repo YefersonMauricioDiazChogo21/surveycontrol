@@ -1,8 +1,12 @@
 INSERT INTO rol (rol) VALUES ('Administrador'), ('Encuestado');
 
 INSERT INTO usuario (habilitado, nombre_usuario, contraseña) VALUES 
-(TRUE, 'admin_user', 'admin_pass'), 
-(TRUE, 'encuestado_user', 'encuestado_pass');
+(TRUE, 'mau', 'mau1'), 
+(TRUE, 'lau', 'lau1');
+
+INSERT INTO rol(rol) VALUES
+("Administrador"), -- Administrador
+("Encuestado"); -- Encuestado
 
 INSERT INTO rol_usuario (rol_id, usuario_id) VALUES
 (1, 1), -- Administrador
@@ -13,7 +17,10 @@ INSERT INTO categoria_catalogo (nombre) VALUES
 ('Personal'), 
 ('Seguridad'),
 ('Politica'), 
-('Nutricion');
+('Nutricion'), 
+('.'), 
+('.'), 
+('.');
 
 INSERT INTO formulario (descripcion, nombre) VALUES 
 ('Formulario para evaluar satisfacción del usuario', 'Formulario Satisfacción'),
